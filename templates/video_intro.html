@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Before the video{% endblock %}
+{% block content %}
+  <h1>Up next: a short video</h1>
+  <p class="lead">{{ config.intro_text }}</p>
+  <p>
+    Please watch the whole video with your sound on. As soon as it ends,
+    you'll be asked how it made you feel, and then write a little about
+    it &mdash; there's no need to take notes.
+  </p>
+  <div class="actions">
+    <a class="button" href="{{ url_for('video') }}">Begin</a>
+  </div>
+{% endblock %}

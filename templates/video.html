@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Watch{% endblock %}
+{% block content %}
+  <video id="induction-video" autoplay playsinline
+         src="{{ url_for('static', filename='videos/' + config.filename) }}">
+    Your browser does not support video playback.
+  </video>
+  <p class="hint">The next page will open automatically when the video ends.</p>
+
+  <details class="skip-details">
+    <summary>Staff: skip video</summary>
+    {% if skip_error %}<div class="error">{{ skip_error }}</div>{% endif %}
+    <form method="POST" action="{{ url_for('video_skip') }}" class="skip-form">
+      <input type="password" name="master_key" placeholder="Key">
+      <button type="submit">Skip</button>
+    </form>
+  </details>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    const video = document.getElementById("induction-video");
+    video.addEventListener("ended", function () {
+      window.location.href = "{{ url_for('self_report') }}";
+    });
+  </script>
+{% endblock %}

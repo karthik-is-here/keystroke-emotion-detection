@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}About you{% endblock %}
+{% block content %}
+  <h1>A few details about you</h1>
+  <p class="lead">This helps us understand patterns across different people.</p>
+
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+
+  <form method="POST" action="{{ url_for('demographics') }}">
+    <div class="field">
+      <label for="name">Full name</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+
+    <div class="field">
+      <label for="age">Age</label>
+      <input type="number" id="age" name="age" min="10" max="100">
+    </div>
+
+    <div class="field">
+      <label for="nationality">Nationality</label>
+      <input type="text" id="nationality" name="nationality">
+    </div>
+
+    <div class="field">
+      <label for="first_language">First language</label>
+      <input type="text" id="first_language" name="first_language">
+    </div>
+
+    <div class="field">
+      <label for="typing_experience">How would you rate your typing skill?</label>
+      <select id="typing_experience" name="typing_experience">
+        <option value="">Select one</option>
+        <option value="beginner">Beginner</option>
+        <option value="intermediate">Intermediate</option>
+        <option value="advanced">Advanced</option>
+        <option value="touch_typist">Touch typist</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="dominant_hand">Dominant hand</label>
+      <select id="dominant_hand" name="dominant_hand">
+        <option value="">Select one</option>
+        <option value="right">Right</option>
+        <option value="left">Left</option>
+        <option value="ambidextrous">Ambidextrous</option>
+      </select>
+    </div>
+
+    <div class="actions">
+      <button type="submit">Continue</button>
+    </div>
+  </form>
+{% endblock %}

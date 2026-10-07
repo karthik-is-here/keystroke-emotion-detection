@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Type the passage{% endblock %}
+{% block content %}
+  <h1>Type the passage below</h1>
+  <p class="lead">
+    Please type it exactly as written, at your normal pace.
+  </p>
+
+  <div class="passage">{{ baseline_text }}</div>
+
+  <form method="POST" action="{{ url_for('baseline_fixed') }}" id="baseline-fixed-form">
+    <div class="field">
+      <textarea id="text_content" name="text_content" required
+                placeholder="Start typing the passage above..."></textarea>
+    </div>
+    <div class="word-count" id="word_count"></div>
+
+    <input type="hidden" id="keystroke_data" name="keystroke_data">
+    <input type="hidden" id="duration_ms" name="duration_ms">
+
+    <div class="actions">
+      <button type="submit" id="submit_btn">Continue</button>
+    </div>
+  </form>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/keystroke.js') }}"></script>
+  <script>
+    setupTypingForm({
+      textareaId: "text_content",
+      formId: "baseline-fixed-form",
+      wordCountId: "word_count",
+      submitId: "submit_btn",
+      minWords: 0,
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+  <h1>Before we begin</h1>
+  <p class="lead">
+    Thank you for taking part in this study. Here's what to expect:
+  </p>
+  <p>
+    You'll answer a few short questions about yourself, then type a short
+    passage so we can measure your normal typing pattern. After that,
+    you'll watch four short videos, one at a time, and write a few
+    sentences about each one. The whole session takes about
+    15&ndash;20 minutes.
+  </p>
+  <p>
+    We record what you type and the timing of your keystrokes. Your
+    written responses and how you describe your reaction to each video
+    are used only for this research project.
+  </p>
+  <p class="hint">
+    <!-- PLACEHOLDER: insert your institution's actual consent/ethics text
+         here before running real sessions with participants. -->
+    By continuing, you agree to take part in this study.
+  </p>
+  <form method="POST" action="{{ url_for('consent') }}">
+    <div class="actions">
+      <button type="submit">I agree, continue</button>
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Quick check{% endblock %}
+{% block content %}
+  <h1>One quick question</h1>
+  <p class="lead">{{ config.comprehension_question }}</p>
+
+  <form method="POST" action="{{ url_for('comprehension') }}">
+    <div class="field radio-list">
+      {% for option in config.comprehension_options %}
+        <label>
+          <input type="radio" name="answer" value="{{ option }}" required>
+          {{ option }}
+        </label>
+      {% endfor %}
+    </div>
+    <div class="actions">
+      <button type="submit">Continue</button>
+    </div>
+  </form>
+{% endblock %}

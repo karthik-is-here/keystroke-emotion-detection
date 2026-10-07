@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Write about the video{% endblock %}
+{% block content %}
+  <h1>What did you just watch?</h1>
+  <p class="lead">
+    Write at least {{ min_words }} words about the video &mdash; what
+    happened, and how it made you feel.
+  </p>
+
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+
+  <form method="POST" action="{{ url_for('typing') }}" id="typing-form">
+    <div class="field">
+      <textarea id="text_content" name="text_content" required
+                placeholder="Start writing..."></textarea>
+    </div>
+    <div class="word-count" id="word_count"></div>
+
+    <input type="hidden" id="keystroke_data" name="keystroke_data">
+    <input type="hidden" id="duration_ms" name="duration_ms">
+
+    <div class="actions">
+      <button type="submit" id="submit_btn" disabled>Continue</button>
+    </div>
+  </form>
+{% endblock %}
+
+{% block scripts %}
+  <script src="{{ url_for('static', filename='js/keystroke.js') }}"></script>
+  <script>
+    setupTypingForm({
+      textareaId: "text_content",
+      formId: "typing-form",
+      wordCountId: "word_count",
+      submitId: "submit_btn",
+      minWords: {{ min_words }},
+    });
+  </script>
+{% endblock %}

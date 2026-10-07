@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Short break{% endblock %}
+{% block content %}
+  <h1>Take a short break</h1>
+  <p class="lead">
+    The next part will start automatically in
+    <span id="countdown">{{ seconds }}</span> seconds.
+  </p>
+
+  <details class="skip-details">
+    <summary>Staff: skip wait</summary>
+    {% if skip_error %}<div class="error">{{ skip_error }}</div>{% endif %}
+    <form method="POST" action="{{ url_for('round_gap') }}" class="skip-form">
+      <input type="password" name="master_key" placeholder="Key">
+      <button type="submit">Skip</button>
+    </form>
+  </details>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    let remaining = {{ seconds }};
+    const el = document.getElementById("countdown");
+    const timer = setInterval(function () {
+      remaining -= 1;
+      if (el && remaining >= 0) el.textContent = remaining;
+      if (remaining <= 0) clearInterval(timer);
+    }, 1000);
+    setTimeout(function () {
+      window.location.href = "{{ next_url }}";
+    }, {{ seconds }} * 1000);
+  </script>
+{% endblock %}
