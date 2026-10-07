@@ -56,16 +56,9 @@ BASELINE_QUESTIONS = [
 # turning it into a real writing task. No hard maximum is enforced — the
 # on-screen instruction just asks for "about two sentences."
 BASELINE_MIN_WORD_COUNT = 15
-
-# --- The "opposite emotion" writing task ------------------------------------
-# After self-reporting how the video actually made them feel, the
-# participant is asked to write about a contrasting emotion instead. Where
-# more than one option is listed, one is picked at random. "neutral" has no
-# defined opposite in the brief given, so it falls back to a random pick
-# across all four emotions.
 OPPOSITE_EMOTION_MAP = {
     "angry": ["happy", "calm"],
-    "sad": ["happy", "calm", "angry"],
+    "sad": ["happy", "calm"],
     "happy": ["sad"],
     "calm": ["angry"],
     

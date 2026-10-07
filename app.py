@@ -139,6 +139,32 @@ def _save_typing_sample(label, sample_type, participant_id, session_id, text_con
     return sample
 
 
+def _pick_balanced_target(chosen):
+    """Pick whichever opposite emotion has been used least so far for this
+    self-reported emotion, so that e.g. angry and sad each split evenly
+    between happy and calm. Ties are broken randomly."""
+    candidates = OPPOSITE_EMOTION_MAP.get(chosen, EMOTIONS)
+    if len(candidates) == 1:
+        return candidates[0]
+
+    counts = dict.fromkeys(candidates, 0)
+    rows = (
+        db.session.query(TypingSample.target_emotion, db.func.count(TypingSample.id))
+        .filter(
+            TypingSample.sample_type == "opposite_response",
+            TypingSample.self_reported_emotion == chosen,
+            TypingSample.target_emotion.in_(candidates),
+        )
+        .group_by(TypingSample.target_emotion)
+        .all()
+    )
+    for target, n in rows:
+        counts[target] = n
+
+    fewest = min(counts.values())
+    return random.choice([c for c, n in counts.items() if n == fewest])
+
+
 def _advance_to_next_emotion():
     """Pop the next emotion off the queue into session['current_emotion'],
     and randomly pick one of its 3 videos. Returns True if there was one,
@@ -410,9 +436,7 @@ def self_report():
                 error="Please choose one option.", step_label=_step_label(),
             )
         session["current_self_report"] = chosen
-        session["current_target_emotion"] = random.choice(
-            OPPOSITE_EMOTION_MAP.get(chosen, EMOTIONS)
-        )
+        session["current_target_emotion"] = _pick_balanced_target(chosen)
         return redirect(url_for("typing"))
 
     return render_template(
