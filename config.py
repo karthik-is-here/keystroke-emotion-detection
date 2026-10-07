@@ -24,14 +24,14 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Minimum words required when writing about the video just watched.
-    MIN_WORD_COUNT = 80
+    MIN_WORD_COUNT = 50
 
 
 # The four video-induced emotions.
 EMOTIONS = ["happy", "sad", "angry", "calm"]
 
 # All labels a participant can choose from on the self-report screen.
-SELF_REPORT_LABELS = ["happy", "sad", "angry", "calm", "neutral"]
+SELF_REPORT_LABELS = ["happy", "sad", "angry", "calm"]
 
 # --- Baseline task 1: fixed passage (transcribed verbatim) -----------------
 # Kept short (max two sentences) on purpose — this is just to get a quick,
@@ -68,10 +68,10 @@ OPPOSITE_EMOTION_MAP = {
     "sad": ["happy", "calm", "angry"],
     "happy": ["sad"],
     "calm": ["angry"],
-    "neutral": ["happy", "sad", "angry", "calm"],
+    
 }
 OPPOSITE_MIN_WORD_COUNT = 40
-OPPOSITE_MAX_WORD_COUNT = 80
+OPPOSITE_MAX_WORD_COUNT = 60
 
 # Typing this into a "skip" box (on the video page, or during the
 # between-round break) jumps straight ahead. Meant for testing/development
