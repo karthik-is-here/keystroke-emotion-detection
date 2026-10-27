@@ -9,7 +9,7 @@ import csv
 import os
 
 from app import app
-from models import ComprehensionCheck, EmotionSession, KeystrokeEvent, Participant, TypingSample, db
+from models import EmotionSession, KeystrokeEvent, Participant, TypingSample, db
 
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), "exports")
 
@@ -51,12 +51,6 @@ def main():
             "keystroke_events.csv",
             ["id", "typing_sample_id", "key", "event_type", "timestamp_ms",
              "sequence_index"],
-        )
-        _export(
-            ComprehensionCheck,
-            "comprehension_checks.csv",
-            ["id", "typing_sample_id", "question", "selected_answer",
-             "correct_answer", "is_correct"],
         )
 
 

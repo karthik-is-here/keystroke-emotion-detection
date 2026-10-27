@@ -4,8 +4,7 @@ Database models.
 Per participant: one EmotionSession, plus TypingSamples of several kinds
 (see `sample_type` below) — two baseline samples, then for each of the 4
 emotion rounds, a 'video_response' sample and an 'opposite_response'
-sample. Each TypingSample has many KeystrokeEvents. Each round's
-'video_response' sample also gets one ComprehensionCheck.
+sample. Each TypingSample has many KeystrokeEvents.
 """
 
 from datetime import datetime
@@ -103,12 +102,6 @@ class TypingSample(db.Model):
     keystroke_events = db.relationship(
         "KeystrokeEvent", backref="typing_sample", lazy=True, cascade="all, delete-orphan"
     )
-    comprehension_check = db.relationship(
-        "ComprehensionCheck",
-        backref="typing_sample",
-        uselist=False,
-        cascade="all, delete-orphan",
-    )
 
 
 class KeystrokeEvent(db.Model):
@@ -122,16 +115,3 @@ class KeystrokeEvent(db.Model):
     event_type = db.Column(db.String(4), nullable=False)  # 'down' or 'up'
     timestamp_ms = db.Column(db.Float, nullable=False)  # relative to sample start
     sequence_index = db.Column(db.Integer, nullable=False)
-
-
-class ComprehensionCheck(db.Model):
-    __tablename__ = "comprehension_checks"
-
-    id = db.Column(db.Integer, primary_key=True)
-    typing_sample_id = db.Column(
-        db.Integer, db.ForeignKey("typing_samples.id"), nullable=False
-    )
-    question = db.Column(db.Text, nullable=False)
-    selected_answer = db.Column(db.Text, nullable=False)
-    correct_answer = db.Column(db.Text, nullable=False)
-    is_correct = db.Column(db.Boolean, nullable=False)

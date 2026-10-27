@@ -11,7 +11,7 @@ Flow per participant:
   -> for each of 4 emotions, in random order:
        video intro -> video (1 of 3 for that emotion, random) ->
        self-report current emotion -> write about the video ->
-       write about a contrasting emotion -> comprehension check ->
+       write about the same video as if it felt like a contrasting emotion ->
        10s break (skipped after the last round)
   -> thank you
 
@@ -41,7 +41,7 @@ from config import (
     SELF_REPORT_LABELS,
     VIDEO_LIBRARY,
 )
-from models import ComprehensionCheck, EmotionSession, KeystrokeEvent, Participant, TypingSample, db
+from models import EmotionSession, KeystrokeEvent, Participant, TypingSample, db
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -474,7 +474,7 @@ def typing():
                 step_label=_step_label(),
             )
 
-        sample = _save_typing_sample(
+        _save_typing_sample(
             label=emotion,
             sample_type="video_response",
             participant_id=session["participant_id"],
@@ -485,7 +485,6 @@ def typing():
             self_reported_emotion=session["current_self_report"],
             video_filename=_current_video_config()["filename"],
         )
-        session["current_video_sample_id"] = sample.id
         return redirect(url_for("opposite_typing"))
 
     return render_template(
@@ -496,7 +495,8 @@ def typing():
 
 @app.route("/opposite_typing", methods=["GET", "POST"])
 def opposite_typing():
-    """Write about a contrasting emotion to the one they just reported."""
+    """Write about the same video as if it had made them feel a contrasting
+    emotion (picked from OPPOSITE_EMOTION_MAP based on what they reported)."""
     if not _require_participant() or not _require_current_emotion():
         return redirect(url_for("index"))
     if "current_target_emotion" not in session:
@@ -538,34 +538,6 @@ def opposite_typing():
             video_filename=_current_video_config()["filename"],
         )
         session.pop("current_target_emotion", None)
-        return redirect(url_for("comprehension"))
-
-    return render_template(
-        "opposite_typing.html", target_emotion=target_emotion,
-        min_words=OPPOSITE_MIN_WORD_COUNT, max_words=OPPOSITE_MAX_WORD_COUNT,
-        error=None, step_label=_step_label(),
-    )
-
-
-@app.route("/comprehension", methods=["GET", "POST"])
-def comprehension():
-    if not _require_participant() or not _require_current_emotion():
-        return redirect(url_for("index"))
-    config = _current_video_config()
-
-    if request.method == "POST":
-        selected = request.form.get("answer", "")
-        check = ComprehensionCheck(
-            typing_sample_id=session["current_video_sample_id"],
-            question=config["comprehension_question"],
-            selected_answer=selected,
-            correct_answer=config["correct_answer"],
-            is_correct=(selected == config["correct_answer"]),
-        )
-        db.session.add(check)
-        db.session.commit()
-
-        session.pop("current_video_sample_id", None)
         session.pop("current_self_report", None)
 
         if _advance_to_next_emotion():
@@ -574,14 +546,16 @@ def comprehension():
         return redirect(url_for("thank_you"))
 
     return render_template(
-        "comprehension.html", config=config, step_label=_step_label()
+        "opposite_typing.html", target_emotion=target_emotion,
+        min_words=OPPOSITE_MIN_WORD_COUNT, max_words=OPPOSITE_MAX_WORD_COUNT,
+        error=None, step_label=_step_label(),
     )
 
 
 @app.route("/round_gap", methods=["GET", "POST"])
 def round_gap():
     """A short mandatory break between rounds. gap_next is intentionally
-    NOT cleared here — it's overwritten fresh by comprehension() before
+    NOT cleared here — it's overwritten fresh by opposite_typing() before
     every visit, and leaving it in place means a page refresh during the
     break still lands on the correct next step."""
     if not _require_participant():

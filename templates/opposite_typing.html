@@ -1,8 +1,9 @@
 {% extends "base.html" %}
-{% block title %}Write about {{ target_emotion }}{% endblock %}
+{% block title %}Write about the video{% endblock %}
 {% block content %}
-  <h1>Now, write about something that makes you feel {{ target_emotion }}</h1>
+  <h1>Now, write about the same video as if it made you feel {{ target_emotion }}</h1>
   <p class="lead">
+    Imagine the video you just watched left you feeling {{ target_emotion }}, and describe it that way.
     Write between {{ min_words }} and {{ max_words }} words.
   </p>
 

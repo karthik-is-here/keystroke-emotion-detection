@@ -72,7 +72,7 @@ OPPOSITE_MAX_WORD_COUNT = 60
 MASTER_SKIP_KEY = "1234"
 
 # Seconds of mandatory break shown between the end of one emotion round
-# (after its comprehension check) and the start of the next.
+# (after the opposite-emotion writing task) and the start of the next.
 ROUND_GAP_SECONDS = 10
 
 # --- Video library -----------------------------------------------------
@@ -81,48 +81,17 @@ ROUND_GAP_SECONDS = 10
 # within the same emotion category (variety across the dataset), while any
 # single participant only ever sees one video per emotion.
 #
-# IMPORTANT: every filename below is a placeholder. Drop real video files
-# into static/videos/ using these exact filenames, and replace each
-# comprehension question/options/answer to match the real content. See
-# README.md for details, and the chat message at the end of this build for
-# the full filename list.
-def _placeholder_video(filename):
+# Put the 12 video files in static/videos/ using these exact filenames.
+def _video(filename):
     return {
         "filename": filename,
-        "intro_text": (
-            "You're about to watch a short video. Afterwards, you'll be "
-            "asked a few questions about it."
-        ),
-        "comprehension_question": "PLACEHOLDER — replace with a real question about this video.",
-        "comprehension_options": [
-            "PLACEHOLDER option A",
-            "PLACEHOLDER option B",
-            "PLACEHOLDER option C",
-            "PLACEHOLDER option D",
-        ],
-        "correct_answer": "PLACEHOLDER option A",
+        "intro_text": "You're about to watch a short video.",
     }
 
 
 VIDEO_LIBRARY = {
-    "happy": [
-        _placeholder_video("happy_1.mp4"),
-        _placeholder_video("happy_2.mp4"),
-        _placeholder_video("happy_3.mp4"),
-    ],
-    "sad": [
-        _placeholder_video("sad_1.mp4"),
-        _placeholder_video("sad_2.mp4"),
-        _placeholder_video("sad_3.mp4"),
-    ],
-    "angry": [
-        _placeholder_video("angry_1.mp4"),
-        _placeholder_video("angry_2.mp4"),
-        _placeholder_video("angry_3.mp4"),
-    ],
-    "calm": [
-        _placeholder_video("calm_1.mp4"),
-        _placeholder_video("calm_2.mp4"),
-        _placeholder_video("calm_3.mp4"),
-    ],
+    "happy": [_video("happy_1.mp4"), _video("happy_2.mp4"), _video("happy_3.mp4")],
+    "sad": [_video("sad_1.mp4"), _video("sad_2.mp4"), _video("sad_3.mp4")],
+    "angry": [_video("angry_1.mp4"), _video("angry_2.mp4"), _video("angry_3.mp4")],
+    "calm": [_video("calm_1.mp4"), _video("calm_2.mp4"), _video("calm_3.mp4")],
 }
