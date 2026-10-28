@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block title %}Watch{% endblock %}
+{% block body_class %}wide-page{% endblock %}
 {% block content %}
   <video id="induction-video" autoplay playsinline
          src="{{ url_for('static', filename='videos/' + config.filename) }}">

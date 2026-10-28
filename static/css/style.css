@@ -212,3 +212,31 @@ video {
   padding: 6px 14px;
   font-size: 13px;
 }
+
+/* Video page only: use most of the window for the video, while leaving
+   room below it for the collapsed (or opened) staff skip control. */
+.wide-page {
+  padding: 16px 20px;
+}
+
+.wide-page .page {
+  max-width: 1400px;
+}
+
+.wide-page .progress {
+  margin-bottom: 12px;
+}
+
+.wide-page .card {
+  padding: 16px;
+}
+
+.wide-page video {
+  max-height: calc(100vh - 230px);
+  min-height: 280px;
+  object-fit: contain;
+}
+
+.wide-page .skip-details {
+  margin-top: 12px;
+}
