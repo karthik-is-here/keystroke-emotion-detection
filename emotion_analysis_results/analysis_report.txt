@@ -1,0 +1,87 @@
+KEYSTROKE EMOTION STATISTICAL ANALYSIS
+============================================================
+Database: D:\projeect\keystock\keystroke-emotion-detection\instance\data.db
+Typing samples: 40
+Unique participants: 4
+Features analyzed: ['wpm', 'error_rate', 'duration_seconds', 'word_count']
+
+Emotion counts:
+label
+neutral    8
+angry      8
+sad        8
+happy      8
+calm       8
+
+Interpretation: Friedman tests evaluate matched emotion conditions within participants. Holm-adjusted p-values account for multiple tests. Kendall's W summarizes the Friedman effect size. Pairwise Wilcoxon results use Holm correction within each feature/sample-type family. Correlations pooled across repeated samples are descriptive, not valid independent-observation inference.
+
+Friedman results:
+      sample_type          feature  n_participants  n_conditions              conditions  friedman_statistic  p_value  kendall_w  holm_adjusted_p  significant_after_correction
+   video_response              wpm               4             4 angry, calm, happy, sad            2.100000 0.551913   0.175000         1.000000                         False
+   video_response       error_rate               4             4 angry, calm, happy, sad            2.100000 0.551913   0.175000         1.000000                         False
+   video_response duration_seconds               4             4 angry, calm, happy, sad            7.500000 0.057558   0.625000         0.460468                         False
+   video_response       word_count               4             4 angry, calm, happy, sad            2.333333 0.506165   0.194444         1.000000                         False
+opposite_response              wpm               4             4 angry, calm, happy, sad            1.200000 0.753004   0.100000         1.000000                         False
+opposite_response       error_rate               4             4 angry, calm, happy, sad            0.600000 0.896432   0.050000         1.000000                         False
+opposite_response duration_seconds               4             4 angry, calm, happy, sad            2.700000 0.440227   0.225000         1.000000                         False
+opposite_response       word_count               4             4 angry, calm, happy, sad            6.000000 0.111610   0.500000         0.781272                         False
+
+Pairwise results:
+      sample_type          feature emotion_a emotion_b  n_pairs  median_a  median_b  wilcoxon_statistic  p_value  rank_biserial  holm_adjusted_p  significant_after_correction
+   video_response              wpm     angry      calm        4  16.49500  19.84000                 3.0    0.625      -0.400000             1.00                         False
+   video_response              wpm     angry     happy        4  16.49500  20.70500                 2.0    0.375      -0.600000             1.00                         False
+   video_response              wpm     angry       sad        4  16.49500  15.48500                 3.0    0.625      -0.400000             1.00                         False
+   video_response              wpm      calm     happy        4  19.84000  20.70500                 3.0    0.625       0.400000             1.00                         False
+   video_response              wpm      calm       sad        4  19.84000  15.48500                 3.0    0.625       0.400000             1.00                         False
+   video_response              wpm     happy       sad        4  20.70500  15.48500                 3.0    0.625       0.400000             1.00                         False
+   video_response       error_rate     angry      calm        4   0.13565   0.13165                 5.0    1.000       0.000000             1.00                         False
+   video_response       error_rate     angry     happy        4   0.13565   0.16110                 3.0    0.625      -0.400000             1.00                         False
+   video_response       error_rate     angry       sad        4   0.13565   0.11985                 3.0    0.625       0.400000             1.00                         False
+   video_response       error_rate      calm     happy        4   0.13165   0.16110                 0.0    0.125      -1.000000             0.75                         False
+   video_response       error_rate      calm       sad        4   0.13165   0.11985                 4.0    0.875       0.200000             1.00                         False
+   video_response       error_rate     happy       sad        4   0.16110   0.11985                 1.0    0.250       0.800000             1.00                         False
+   video_response duration_seconds     angry      calm        4 221.10805 156.82950                 0.0    0.125       1.000000             0.75                         False
+   video_response duration_seconds     angry     happy        4 221.10805 157.95180                 0.0    0.125       1.000000             0.75                         False
+   video_response duration_seconds     angry       sad        4 221.10805 195.69310                 0.0    0.125       1.000000             0.75                         False
+   video_response duration_seconds      calm     happy        4 156.82950 157.95180                 2.0    0.375      -0.600000             1.00                         False
+   video_response duration_seconds      calm       sad        4 156.82950 195.69310                 3.0    0.625      -0.400000             1.00                         False
+   video_response duration_seconds     happy       sad        4 157.95180 195.69310                 3.0    0.625      -0.400000             1.00                         False
+   video_response       word_count     angry      calm        4  58.50000  51.50000                 1.0    0.500       0.666667             1.00                         False
+   video_response       word_count     angry     happy        4  58.50000  53.00000                 1.0    0.250       0.800000             1.00                         False
+   video_response       word_count     angry       sad        4  58.50000  50.50000                 1.0    0.500       0.666667             1.00                         False
+   video_response       word_count      calm     happy        4  51.50000  53.00000                 4.0    0.875      -0.200000             1.00                         False
+   video_response       word_count      calm       sad        4  51.50000  50.50000                 0.0    0.250       1.000000             1.00                         False
+   video_response       word_count     happy       sad        4  53.00000  50.50000                 4.0    0.875       0.200000             1.00                         False
+opposite_response              wpm     angry      calm        4  14.95000  11.77500                 3.0    0.625       0.400000             1.00                         False
+opposite_response              wpm     angry     happy        4  14.95000  16.52000                 4.0    0.875      -0.200000             1.00                         False
+opposite_response              wpm     angry       sad        4  14.95000  15.83500                 4.0    0.875      -0.200000             1.00                         False
+opposite_response              wpm      calm     happy        4  11.77500  16.52000                 3.0    0.625      -0.400000             1.00                         False
+opposite_response              wpm      calm       sad        4  11.77500  15.83500                 5.0    1.000       0.000000             1.00                         False
+opposite_response              wpm     happy       sad        4  16.52000  15.83500                 3.0    0.625       0.400000             1.00                         False
+opposite_response       error_rate     angry      calm        4   0.12430   0.14995                 3.0    0.625       0.400000             1.00                         False
+opposite_response       error_rate     angry     happy        4   0.12430   0.13315                 4.0    0.875      -0.200000             1.00                         False
+opposite_response       error_rate     angry       sad        4   0.12430   0.14010                 3.0    0.625       0.400000             1.00                         False
+opposite_response       error_rate      calm     happy        4   0.14995   0.13315                 4.0    0.875       0.200000             1.00                         False
+opposite_response       error_rate      calm       sad        4   0.14995   0.14010                 5.0    1.000       0.000000             1.00                         False
+opposite_response       error_rate     happy       sad        4   0.13315   0.14010                 4.0    0.875      -0.200000             1.00                         False
+opposite_response duration_seconds     angry      calm        4 174.01925 231.89960                 2.0    0.375      -0.600000             1.00                         False
+opposite_response duration_seconds     angry     happy        4 174.01925 157.27695                 3.0    0.625       0.400000             1.00                         False
+opposite_response duration_seconds     angry       sad        4 174.01925 164.30905                 4.0    0.875       0.200000             1.00                         False
+opposite_response duration_seconds      calm     happy        4 231.89960 157.27695                 1.0    0.250       0.800000             1.00                         False
+opposite_response duration_seconds      calm       sad        4 231.89960 164.30905                 2.0    0.375       0.600000             1.00                         False
+opposite_response duration_seconds     happy       sad        4 157.27695 164.30905                 4.0    0.875      -0.200000             1.00                         False
+opposite_response       word_count     angry      calm        4  43.00000  45.50000                 4.0    0.750      -0.200000             1.00                         False
+opposite_response       word_count     angry     happy        4  43.00000  41.50000                 0.0    0.125       1.000000             0.75                         False
+opposite_response       word_count     angry       sad        4  43.00000  41.50000                 3.0    0.625       0.400000             1.00                         False
+opposite_response       word_count      calm     happy        4  45.50000  41.50000                 0.0    0.125       1.000000             0.75                         False
+opposite_response       word_count      calm       sad        4  45.50000  41.50000                 1.0    0.250       0.800000             1.00                         False
+opposite_response       word_count     happy       sad        4  41.50000  41.50000                 4.5    1.000      -0.100000             1.00                         False
+
+Correlation results:
+       feature_a        feature_b  n_samples  spearman_rho  p_value  holm_adjusted_p
+             wpm       error_rate         40     -0.308255 0.052969         0.158908
+             wpm duration_seconds         40     -0.614634 0.000025         0.000147
+             wpm       word_count         40      0.252044 0.116655         0.233309
+      error_rate duration_seconds         40      0.398874 0.010788         0.043151
+      error_rate       word_count         40      0.196035 0.225389         0.233309
+duration_seconds       word_count         40      0.518749 0.000605         0.003025
