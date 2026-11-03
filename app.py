@@ -258,7 +258,16 @@ def demographics():
                 step_label="Step 1 of 7",
             )
 
+        
+        # Generate candidate ID starting from 100
+        last_id = db.session.query(
+            db.func.max(Participant.id)
+        ).scalar()
+
+        next_id = max(100, (last_id or 0) + 1)
+
         participant = Participant(
+            id=next_id,
             name=name,
             age=int(age) if age.isdigit() else None,
             nationality=nationality or None,
@@ -266,8 +275,10 @@ def demographics():
             typing_experience=typing_experience or None,
             dominant_hand=dominant_hand or None,
         )
+
         db.session.add(participant)
         db.session.flush()
+
 
         order = EMOTIONS.copy()
         random.shuffle(order)
