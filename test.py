@@ -1,14 +1,11 @@
-import sqlite3
+import torch
+import transformers
+import pandas
+import sklearn
 
-conn = sqlite3.connect("instance/data.db")
+print("PyTorch:", torch.__version__)
+print("Transformers:", transformers.__version__)
+print("Pandas:", pandas.__version__)
+print("Scikit-learn:", sklearn.__version__)
 
-rows = conn.execute("""
-    SELECT id, name
-    FROM participants
-    ORDER BY id
-""").fetchall()
-
-for row in rows:
-    print(row)
-
-conn.close()
+print("\nAll libraries imported successfully!")
