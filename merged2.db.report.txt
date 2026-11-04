@@ -1,0 +1,45 @@
+A: 10 participant rows | B: 17 participant rows
+
+Dropped:
+  file A id   6  Nehal Pramod  (no typing samples)
+  file B id 101  khaleel Usman  (no typing samples)
+  file B id   1  Karthik Anil  (identical copy of file A id 1)
+  file B id   2  vishnu sreerag  (identical copy of file A id 2)
+  file B id   3  Anurag U Manu  (identical copy of file A id 3)
+  file B id   4  Anandhu Krishna K S  (identical copy of file A id 4)
+
+Merged database: merged2.db
+ id  name                     from old id samples key_presses
+  1  Karthik Anil             A         1      10        2579
+  2  vishnu sreerag           A         2      10        3640
+  3  Anurag U Manu            A         3      10        2793
+  4  Anandhu Krishna K S      A         4      10        5033
+  5  Finan Muhammed           A         5      10        3658
+  6  Nehal Pramod             A         7      10        2933
+  7  Rithuraj P               A         8      10        2633
+  8  Akshai Krishna S         A         9      10        2727
+  9  Jishnu P N               A        10      10        3321
+ 10  Hari Haran               B       100      10        2855
+ 11  khaleel Usman            B       102      10        2726
+ 12  Ghanasyam Indulal        B       103      10        2964
+ 13  Kennath Paul Kurian      B       104      10        3122
+ 14  Anfas K                  B       105      10        3252
+ 15  M P SREEKAANTH           B       106      10        1660
+ 16  Abin.c                   B       107      10        3258
+ 17  Aadith                   B       108      10        3638
+ 18  Neel Krishna S           B       109      10        2274
+ 19  Angel Thomas             B       110      10        2465
+ 20  Agnal KV                 B       111      10        3471
+ 21  Jeswin Tom               B       112      10        2952
+
+Totals: 21 participants, 210 samples, 127916 keystroke events
+
+Opposite-emotion assignments (self-reported -> asked to write about):
+  angry  -> calm   5
+  angry  -> happy  7
+  calm   -> angry  35
+  happy  -> sad    17
+  sad    -> calm   10
+  sad    -> happy  10
+
+Checks passed: integrity OK, no foreign-key problems, every participant's data matches its source.
