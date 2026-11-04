@@ -195,7 +195,7 @@ def main():
 
     df = pd.DataFrame(results)
 
-    output_csv = OUTPUT_DIR / "keystroke_features.csv"
+    output_csv = OUTPUT_DIR / "keystroke_features2.csv"
     df.to_csv(output_csv, index=False, encoding="utf-8-sig")
 
     print("\nFEATURE EXTRACTION COMPLETED")
