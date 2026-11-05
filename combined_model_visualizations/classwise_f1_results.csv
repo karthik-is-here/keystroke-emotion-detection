@@ -1,0 +1,13 @@
+model,condition,valence,f1_score
+Logistic Regression,genuine,negative,0.6461538461538462
+Logistic Regression,genuine,neutral,0.6567164179104478
+Logistic Regression,genuine,positive,0.3888888888888889
+Logistic Regression,masked,negative,0.25
+Logistic Regression,masked,neutral,0.34375
+Logistic Regression,masked,positive,0.32142857142857145
+Random Forest,genuine,negative,0.7
+Random Forest,genuine,neutral,0.7045454545454546
+Random Forest,genuine,positive,0.2
+Random Forest,masked,negative,0.6027397260273972
+Random Forest,masked,neutral,0.6
+Random Forest,masked,positive,0.16
