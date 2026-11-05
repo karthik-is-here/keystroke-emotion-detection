@@ -1,0 +1,7 @@
+feature,eligible_pairs,total_pairs
+hold_eligible,82,84
+flight_eligible,82,84
+speed_eligible,82,84
+pause_eligible,82,84
+backspace_eligible,82,84
+duration_eligible,84,84
